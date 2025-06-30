@@ -1,0 +1,240 @@
+/* Layout wrapper */
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Controls Section - Centered */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-container,
+.sort-group-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.controls input,
+.controls select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+}
+
+.controls input:focus,
+.controls select:focus {
+  outline: none;
+  border-color: #4a6bff;
+  box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+}
+
+.controls select:hover,
+.controls input:hover {
+  background-color: #f9f9f9;
+}
+
+/* Songs Container */
+.songs-container {
+  margin-top: 20px;
+background: linear-gradient(to right, #cdd0d4, #e4e0e0); /* clean dark blue */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.group-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Grouped Content Wrapper — to center groups inside songs-container */
+.grouped-content-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.group {
+  background: #f9f9f9;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.group-header {
+  margin-bottom: 1rem;
+  padding: 8px;
+  text-align: center;
+  color: #333;
+  font-size: 1.25rem;
+background-color: #e1f5fe; /* ice blue */
+  border-radius: 4px;
+}
+
+/* Song layout */
+.horizontal-group,
+.horizontal-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Song Card */
+.song-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  min-height: 150px;
+  border-left: 4px solid #4a6bff;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.song-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.song-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.song-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.song-year {
+  background-color: #4a6bff;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.song-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.song-artist,
+.song-album {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #4a6bff;
+  margin-right: 6px;
+}
+
+.no-results {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sort-group-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .controls select,
+  .controls input {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .song-card {
+    width: 160px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .song-card {
+    width: 140px;
+    padding: 12px;
+  }
+
+  .group-header {
+    font-size: 1.1rem;
+  }
+
+  .songs-container {
+    padding: 15px;
+  }
+}
+
+/* Title Styling */
+.music-library-title {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  padding-bottom: 10px;
+  border-bottom: 2px solid #4a6bff;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
