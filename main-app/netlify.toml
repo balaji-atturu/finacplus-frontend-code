@@ -5,3 +5,11 @@
 
 [context.production.environment]
   VITE_MUSIC_LIBRARY_URL = "https://your-music-library.netlify.app"
+
+ 
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, OPTIONS"
