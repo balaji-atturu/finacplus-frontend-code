@@ -19,6 +19,7 @@
     "preview:music": "cd music-library && npm run preview"
   },
   "devDependencies": {
+    "@originjs/vite-plugin-federation": "^1.4.1",
     "concurrently": "^8.2.2"
   },
   "repository": {
