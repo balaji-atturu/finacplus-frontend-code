@@ -19,8 +19,7 @@
     "preview:music": "cd music-library && npm run preview"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "vite": "^7.0.0"
+    "concurrently": "^8.2.2"
   },
   "repository": {
     "type": "git",
@@ -36,5 +35,8 @@
   "bugs": {
     "url": "https://github.com/balaji-atturu/finacplus-frontend-code/issues"
   },
-  "homepage": "https://github.com/balaji-atturu/finacplus-frontend-code#readme"
+  "homepage": "https://github.com/balaji-atturu/finacplus-frontend-code#readme",
+  "dependencies": {
+    "vite": "^7.0.0"
+  }
 }
