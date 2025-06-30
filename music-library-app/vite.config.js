@@ -50,7 +50,6 @@
 //   }
 // });
 
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
@@ -60,33 +59,57 @@ export default defineConfig({
     react(),
     federation({
       name: 'musicLibrary',
-      filename: 'remoteEntry.js',
+      filename: 'remoteEntry.js', // Must match the main app's remote URL
       exposes: {
         './MusicLibrary': './src/components/MusicLibrary.jsx'
       },
-      shared: ['react', 'react-dom', 'lodash']
+      shared: [
+        'react',
+        'react-dom',
+        'lodash'
+      ]
     })
   ],
-  base: '/',
+  base: '/', // Critical for correct asset paths
   server: {
     port: 5001,
     strictPort: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, OPTIONS"
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type"
+    },
+    hmr: {
+      protocol: 'ws',
+      host: 'localhost'
+    }
+  },
+  preview: {
+    port: 5001,
+    headers: {
+      "Access-Control-Allow-Origin": "*"
     }
   },
   build: {
-    target: 'esnext',
+    target: 'esnext', // Required for Module Federation
     outDir: 'dist',
+    minify: 'terser', // Added minification
     cssCodeSplit: false,
     rollupOptions: {
       output: {
         entryFileNames: 'assets/[name].js',
         chunkFileNames: 'assets/[name].js',
         assetFileNames: 'assets/[name].[ext]',
-        format: 'esm'
-      }
+        format: 'esm', // ES Modules required
+        globals: {
+          'lodash': '_' // Define global for external deps
+        }
+      },
+      external: ['lodash'] // Mark as external if shared
     }
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'lodash'],
+    exclude: ['federation-runtime'] // Critical for Module Federation
   }
 });
