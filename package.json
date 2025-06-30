@@ -19,7 +19,8 @@
     "preview:music": "cd music-library && npm run preview"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "terser": "^5.43.1"
   },
   "repository": {
     "type": "git",
