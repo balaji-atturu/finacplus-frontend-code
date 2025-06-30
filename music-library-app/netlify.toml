@@ -1,6 +1,7 @@
 [build]
-  command = "npm run build"
+  command = "cd .. && rm -rf node_modules && npm install && cd music-library && npm run build"
   publish = "dist"
+  environment = { NODE_ENV = "production" }
 
 [[headers]]
   for = "/*"

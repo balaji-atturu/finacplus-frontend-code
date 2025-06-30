@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
         remotes: {
           musicLibrary: `${env.VITE_MUSIC_LIBRARY_URL || 'https://your-music-library.netlify.app'}/assets/remoteEntry.js`
         },
-        shared: ['react', 'react-dom', 'react-router-dom']
+        shared: ['react', 'react-dom', 'react-router-dom', 'lodash'] // Added lodash here
       })
     ],
     base: '/',
@@ -38,10 +38,14 @@ export default defineConfig(({ mode }) => {
       minify: 'terser',
       cssCodeSplit: false,
       rollupOptions: {
+        external: ['lodash'], // Mark lodash as external
         output: {
+          globals: {
+            'lodash': '_' // Define global variable name
+          },
           manualChunks: {
             react: ['react', 'react-dom', 'react-router-dom'],
-            vendor: ['lodash', 'axios']
+            vendor: ['lodash', 'axios'] // Ensure lodash is chunked
           }
         }
       }
@@ -50,7 +54,8 @@ export default defineConfig(({ mode }) => {
       include: [
         'react',
         'react-dom',
-        'react-router-dom'
+        'react-router-dom',
+        'lodash' // Added for dependency optimization
       ],
       exclude: ['js-big-decimal']
     }

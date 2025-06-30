@@ -11,7 +11,7 @@ export default defineConfig({
       exposes: {
         './MusicLibrary': './src/components/MusicLibrary.jsx'
       },
-      shared: ['react', 'react-dom']
+      shared: ['react', 'react-dom','lodash']
     })
   ],
   base: '/', // Required for proper asset paths
