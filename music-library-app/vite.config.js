@@ -378,6 +378,61 @@
 
 
 
+// import { defineConfig } from 'vite';
+// import react from '@vitejs/plugin-react';
+// import federation from '@originjs/vite-plugin-federation';
+
+// export default defineConfig({
+//   plugins: [
+//     react(),
+//     federation({
+//       name: 'musicLibrary',
+//       filename: 'remoteEntry.js',
+//       exposes: {
+//         './MusicLibrary': './src/components/MusicLibrary.jsx'
+//       },
+//       shared: ['react', 'react-dom', 'lodash']
+//     })
+//   ],
+//   base: '/',
+//   build: {
+//     target: 'esnext',
+//     modulePreload: false,
+//     minify: false,
+//     cssCodeSplit: false,
+//     rollupOptions: {
+//       output: {
+//         format: 'esm',
+//         entryFileNames: 'assets/[name].[hash].js',
+//         chunkFileNames: 'assets/[name].[hash].js',
+//         assetFileNames: 'assets/[name].[hash].[ext]',
+//         globals: {
+//           'react': 'React',
+//           'react-dom': 'ReactDOM',
+//           'lodash': '_'
+//         }
+//       }
+//     }
+//   },
+//   server: {
+//     port: 5001,
+//     cors: true,
+//     headers: {
+//       "Access-Control-Allow-Origin": "*",
+//       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+//       "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+//     }
+//   },
+//   preview: {
+//     port: 5001,
+//     cors: true,
+//     headers: {
+//       "Access-Control-Allow-Origin": "*"
+//     }
+//   }
+// });
+
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
@@ -391,43 +446,18 @@ export default defineConfig({
       exposes: {
         './MusicLibrary': './src/components/MusicLibrary.jsx'
       },
-      shared: ['react', 'react-dom', 'lodash']
+      shared: ['react', 'react-dom']
     })
   ],
-  base: '/',
   build: {
     target: 'esnext',
-    modulePreload: false,
-    minify: false,
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
-        format: 'esm',
-        entryFileNames: 'assets/[name].[hash].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash].[ext]',
-        globals: {
-          'react': 'React',
-          'react-dom': 'ReactDOM',
-          'lodash': '_'
-        }
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
       }
-    }
-  },
-  server: {
-    port: 5001,
-    cors: true,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
-    }
-  },
-  preview: {
-    port: 5001,
-    cors: true,
-    headers: {
-      "Access-Control-Allow-Origin": "*"
     }
   }
 });

@@ -266,6 +266,57 @@
 
 
 
+// import { defineConfig, loadEnv } from 'vite';
+// import react from '@vitejs/plugin-react';
+// import federation from '@originjs/vite-plugin-federation';
+
+// export default defineConfig(({ mode }) => {
+//   const env = loadEnv(mode, process.cwd(), 'VITE_');
+
+//   return {
+//     plugins: [
+//       react(),
+//       federation({
+//         name: 'main_app',
+//         remotes: {
+//           musicLibrary: `${env.VITE_MUSIC_LIBRARY_URL}/assets/remoteEntry.js`
+//         },
+//         shared: ['react', 'react-dom', 'react-router-dom', 'lodash']
+//       })
+//     ],
+//     base: '/',
+//     server: {
+//       port: 5000,
+//       strictPort: true
+//     },
+//     build: {
+//       target: 'esnext',
+//       modulePreload: false, // Important for MF
+//       minify: false, // Easier debugging
+//       cssCodeSplit: false, // Better for MF
+//       rollupOptions: {
+//         output: {
+//           format: 'esm',
+//           entryFileNames: 'assets/[name].[hash].js',
+//           chunkFileNames: 'assets/[name].[hash].js',
+//           assetFileNames: 'assets/[name].[hash].[ext]',
+//           globals: {
+//             'react': 'React',
+//             'react-dom': 'ReactDOM',
+//             'react-router-dom': 'ReactRouterDOM',
+//             'lodash': '_'
+//           }
+//         }
+//       }
+//     },
+//     optimizeDeps: {
+//       include: ['react', 'react-dom', 'react-router-dom', 'lodash']
+//     }
+//   };
+// });
+
+
+
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
@@ -281,36 +332,12 @@ export default defineConfig(({ mode }) => {
         remotes: {
           musicLibrary: `${env.VITE_MUSIC_LIBRARY_URL}/assets/remoteEntry.js`
         },
-        shared: ['react', 'react-dom', 'react-router-dom', 'lodash']
+        shared: ['react', 'react-dom', 'react-router-dom']
       })
     ],
-    base: '/',
-    server: {
-      port: 5000,
-      strictPort: true
-    },
     build: {
       target: 'esnext',
-      modulePreload: false, // Important for MF
-      minify: false, // Easier debugging
-      cssCodeSplit: false, // Better for MF
-      rollupOptions: {
-        output: {
-          format: 'esm',
-          entryFileNames: 'assets/[name].[hash].js',
-          chunkFileNames: 'assets/[name].[hash].js',
-          assetFileNames: 'assets/[name].[hash].[ext]',
-          globals: {
-            'react': 'React',
-            'react-dom': 'ReactDOM',
-            'react-router-dom': 'ReactRouterDOM',
-            'lodash': '_'
-          }
-        }
-      }
-    },
-    optimizeDeps: {
-      include: ['react', 'react-dom', 'react-router-dom', 'lodash']
+      modulePreload: false
     }
   };
 });
