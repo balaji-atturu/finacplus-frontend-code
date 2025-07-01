@@ -332,10 +332,7 @@ export default defineConfig({
     assetsInlineLimit: 0,
     sourcemap: true,
     rollupOptions: {
-       input: {
-        main: './index.html',
-        styles: './src/App.css'  // Explicit CSS entry
-      },
+     
       output: {
         entryFileNames: 'assets/[name].[hash].js',
         chunkFileNames: 'assets/[name].[hash].js',
