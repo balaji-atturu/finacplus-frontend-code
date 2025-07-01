@@ -95,7 +95,7 @@ export default defineConfig(({ mode }) => {
       target: 'esnext',
       outDir: 'dist',
       minify: 'terser',
-      cssCodeSplit: false,
+      cssCodeSplit: true,
       rollupOptions: {
         output: {
           format: 'esm',

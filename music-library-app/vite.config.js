@@ -94,7 +94,7 @@ export default defineConfig({
     target: 'esnext', // Required for Module Federation
     outDir: 'dist',
     minify: 'terser', // Added minification
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
         entryFileNames: 'assets/[name].js',
