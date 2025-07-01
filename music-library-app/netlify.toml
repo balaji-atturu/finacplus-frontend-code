@@ -1,9 +1,13 @@
-[build]
-  command = "cd .. && rm -rf node_modules && npm install && cd music-library-app && npm run build"
+ [build]
+  command = "npm run build"
   publish = "dist"
   environment = { NODE_ENV = "production" }
 
 [[headers]]
-  for = "/*"
+  for = "/assets/*"
   [headers.values]
+    Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
+
+   
+
