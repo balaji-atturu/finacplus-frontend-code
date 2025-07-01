@@ -1,15 +1,13 @@
-[build]
+
+
+
+   #[build]
   command = "npm run build"
   publish = "dist"
-
 [[headers]]
-  for = "/assets/remoteEntry.js"
-  [headers.values]
-    Content-Type = "application/javascript"
+  for = "/*"
+ [headers.values]
     Access-Control-Allow-Origin = "*"
-    Cache-Control = "no-cache, no-store"
-
-[[headers]]
-  for = "/assets/*.js"
-  [headers.values]
-    Content-Type = "application/javascript"
+   Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+   Access-Control-Allow-Headers = "X-Requested-With, content-type, Authorization"
+   Cache-Control = "public, max-age=0, must-revalidate"
