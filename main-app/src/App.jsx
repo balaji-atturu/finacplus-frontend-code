@@ -350,6 +350,32 @@
 
 
 
+ import React, { useState, useEffect, Suspense } from 'react';
+ import { login, isAuthenticated, getRole, logout } from './auth';
+ import './App.css';
+
+const MusicLibrary = React.lazy(() => {
+  const remoteUrl = 'https://music-library-separate.netlify.app/assets/remoteEntry.js';
+  
+  return new Promise((resolve) => {
+    const script = document.createElement('script');
+    script.src = remoteUrl;
+    script.onload = () => {
+      // Manually handle the module import
+      window.__federation_import__('musicLibrary/MusicLibrary')
+        .then(module => resolve(module))
+        .catch(err => {
+          console.error('Failed to load module:', err);
+          throw err;
+        });
+    };
+    script.onerror = (err) => {
+      console.error('Failed to load remote entry:', err);
+      throw err;
+    };
+    document.head.appendChild(script);
+  });
+});
 
 
 
@@ -358,24 +384,21 @@
 
 
 
+// import React, { useState, useEffect, Suspense } from 'react';
+// import { login, isAuthenticated, getRole, logout } from './auth';
+// import './App.css';
 
-
-
-import React, { useState, useEffect, Suspense } from 'react';
-import { login, isAuthenticated, getRole, logout } from './auth';
-import './App.css';
-
-console.log('Attempting to load remote...');
-const MusicLibrary = React.lazy(() => import('musicLibrary/MusicLibrary')
-  .then(module => {
-    console.log('✅ Remote loaded successfully!', module);
-    return module;
-  })
-  .catch(err => {
-    console.error('❌ Remote load failed!', err);
-    throw err;
-  })
-);
+// console.log('Attempting to load remote...');
+// const MusicLibrary = React.lazy(() => import('musicLibrary/MusicLibrary')
+//   .then(module => {
+//     console.log('✅ Remote loaded successfully!', module);
+//     return module;
+//   })
+//   .catch(err => {
+//     console.error('❌ Remote load failed!', err);
+//     throw err;
+//   })
+// );
 
 // import React, { useState, useEffect, Suspense } from 'react';
 // import { login, isAuthenticated, getRole, logout } from './auth';
