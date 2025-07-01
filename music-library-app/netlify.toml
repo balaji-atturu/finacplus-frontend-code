@@ -16,7 +16,7 @@
   publish = "dist"
 
 [[headers]]
-  for = "/remoteEntry.js"
+  for = "/assets/remoteEntry.js"
   [headers.values]
     Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
