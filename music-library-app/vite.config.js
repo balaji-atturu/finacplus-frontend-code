@@ -221,55 +221,55 @@
 // });
 
 
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import federation from '@originjs/vite-plugin-federation';
-import path from 'path';
+// import { defineConfig } from 'vite';
+// import react from '@vitejs/plugin-react';
+// import federation from '@originjs/vite-plugin-federation';
+// import path from 'path';
 
-export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: [
-          ['babel-plugin-react-css-modules', {
-            generateScopedName: '[name]__[local]___[hash:base64:5]',
-            filetypes: { '.css': { syntax: 'postcss' } }
-          }]
-        ]
-      }
-    }),
-    federation({
-      name: 'musicLibrary',
-      filename: 'remoteEntry.js',
-      exposes: { './MusicLibrary': './src/components/MusicLibrary.jsx' },
-      shared: ['react', 'react-dom', 'lodash']
-    })
-  ],
-  base: '/',
-  cssPreprocessOptions: {
-    postcss: { plugins: [] } // Initialize PostCSS
-  },
-  build: {
-    target: 'esnext',
-    outDir: 'dist',
-    cssCodeSplit: true,
-    assetsInlineLimit: 0,
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-        styles: path.resolve(__dirname, 'src/App.css') // Explicit CSS entry
-      },
-      output: {
-        assetFileNames: 'assets/[name].[hash].[ext]'
-      }
-    }
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src')
-    }
-  }
-});
+// export default defineConfig({
+//   plugins: [
+//     react({
+//       babel: {
+//         plugins: [
+//           ['babel-plugin-react-css-modules', {
+//             generateScopedName: '[name]__[local]___[hash:base64:5]',
+//             filetypes: { '.css': { syntax: 'postcss' } }
+//           }]
+//         ]
+//       }
+//     }),
+//     federation({
+//       name: 'musicLibrary',
+//       filename: 'remoteEntry.js',
+//       exposes: { './MusicLibrary': './src/components/MusicLibrary.jsx' },
+//       shared: ['react', 'react-dom', 'lodash']
+//     })
+//   ],
+//   base: '/',
+//   cssPreprocessOptions: {
+//     postcss: { plugins: [] } // Initialize PostCSS
+//   },
+//   build: {
+//     target: 'esnext',
+//     outDir: 'dist',
+//     cssCodeSplit: true,
+//     assetsInlineLimit: 0,
+//     rollupOptions: {
+//       input: {
+//         main: path.resolve(__dirname, 'index.html'),
+//         styles: path.resolve(__dirname, 'src/App.css') // Explicit CSS entry
+//       },
+//       output: {
+//         assetFileNames: 'assets/[name].[hash].[ext]'
+//       }
+//     }
+//   },
+//   resolve: {
+//     alias: {
+//       '@': path.resolve(__dirname, 'src')
+//     }
+//   }
+// });
 
 
 
@@ -368,3 +368,66 @@ export default defineConfig({
 //     }
 //   }
 // });
+
+
+
+
+
+
+
+
+
+
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import federation from '@originjs/vite-plugin-federation';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    federation({
+      name: 'musicLibrary',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './MusicLibrary': './src/components/MusicLibrary.jsx'
+      },
+      shared: ['react', 'react-dom', 'lodash']
+    })
+  ],
+  base: '/',
+  build: {
+    target: 'esnext',
+    modulePreload: false,
+    minify: false,
+    cssCodeSplit: false,
+    rollupOptions: {
+      output: {
+        format: 'esm',
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]',
+        globals: {
+          'react': 'React',
+          'react-dom': 'ReactDOM',
+          'lodash': '_'
+        }
+      }
+    }
+  },
+  server: {
+    port: 5001,
+    cors: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    }
+  },
+  preview: {
+    port: 5001,
+    cors: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
+  }
+});
