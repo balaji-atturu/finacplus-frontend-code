@@ -518,12 +518,11 @@ const App = () => {
           <Suspense fallback={
             <div style={{
               padding: '12px',
-              backgroundColor: '#e0e0e0',
-              borderRadius: '8px',
               textAlign: 'center',
-              color: '#333',
+              backgroundColor:'blue',
+              color: 'red',
               fontWeight: 'bold',
-              fontSize: '16px'
+              fontSize: '26px'
             }}>
               ⏳ Loading Music Library...
             </div>
