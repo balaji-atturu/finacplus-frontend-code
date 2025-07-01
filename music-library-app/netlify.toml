@@ -16,13 +16,13 @@
   publish = "dist"
 
 [[headers]]
-  for = "/assets/remoteEntry.js"
+  for = "/remoteEntry.js"
   [headers.values]
     Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
     Cache-Control = "no-store"
 
 [[headers]]
-  for = "/assets/*.js"
+  for = "/*.js"
   [headers.values]
     Content-Type = "application/javascript"

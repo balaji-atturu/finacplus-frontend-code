@@ -350,55 +350,55 @@
 
 
 
- import React, { useState, useEffect, Suspense } from 'react';
- import { login, isAuthenticated, getRole, logout } from './auth';
- import './App.css';
+//  import React, { useState, useEffect, Suspense } from 'react';
+//  import { login, isAuthenticated, getRole, logout } from './auth';
+//  import './App.css';
 
-const MusicLibrary = React.lazy(() => {
-  return new Promise((resolve) => {
-    // First load the remote entry
-    const script = document.createElement('script');
-    script.src = 'https://music-library-separate.netlify.app/assets/remoteEntry.js';
+// const MusicLibrary = React.lazy(() => {
+//   return new Promise((resolve) => {
+//     // First load the remote entry
+//     const script = document.createElement('script');
+//     script.src = 'https://music-library-separate.netlify.app/assets/remoteEntry.js';
     
-    script.onload = () => {
-      // Then use the standard import() function
-      import('musicLibrary/MusicLibrary')
-        .then(module => {
-          console.log('✅ Remote module loaded successfully');
-          resolve(module);
-        })
-        .catch(err => {
-          console.error('❌ Failed to load module:', err);
-          throw err;
-        });
-    };
+//     script.onload = () => {
+//       // Then use the standard import() function
+//       import('musicLibrary/MusicLibrary')
+//         .then(module => {
+//           console.log('✅ Remote module loaded successfully');
+//           resolve(module);
+//         })
+//         .catch(err => {
+//           console.error('❌ Failed to load module:', err);
+//           throw err;
+//         });
+//     };
     
-    script.onerror = (err) => {
-      console.error('❌ Failed to load remote entry:', err);
-      throw new Error('Failed to load remote entry');
-    };
+//     script.onerror = (err) => {
+//       console.error('❌ Failed to load remote entry:', err);
+//       throw new Error('Failed to load remote entry');
+//     };
     
-    document.head.appendChild(script);
-  });
-});
+//     document.head.appendChild(script);
+//   });
+// });
 
 
 
-// import React, { useState, useEffect, Suspense } from 'react';
-// import { login, isAuthenticated, getRole, logout } from './auth';
-// import './App.css';
+import React, { useState, useEffect, Suspense } from 'react';
+import { login, isAuthenticated, getRole, logout } from './auth';
+import './App.css';
 
-// console.log('Attempting to load remote...');
-// const MusicLibrary = React.lazy(() => import('musicLibrary/MusicLibrary')
-//   .then(module => {
-//     console.log('✅ Remote loaded successfully!', module);
-//     return module;
-//   })
-//   .catch(err => {
-//     console.error('❌ Remote load failed!', err);
-//     throw err;
-//   })
-// );
+console.log('Attempting to load remote...');
+const MusicLibrary = React.lazy(() => import('musicLibrary/MusicLibrary')
+  .then(module => {
+    console.log('✅ Remote loaded successfully!', module);
+    return module;
+  })
+  .catch(err => {
+    console.error('❌ Remote load failed!', err);
+    throw err;
+  })
+);
 
 // import React, { useState, useEffect, Suspense } from 'react';
 // import { login, isAuthenticated, getRole, logout } from './auth';

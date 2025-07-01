@@ -462,7 +462,6 @@
 //   }
 // });
 
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
@@ -484,9 +483,9 @@ export default defineConfig({
     cssCodeSplit: false, // Disable CSS splitting
     rollupOptions: {
       output: {
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]'
+        entryFileNames: 'remoteEntry.js', // Fixed name
+        chunkFileNames: '[name].js',
+        assetFileNames: '[name].[ext]'
       }
     }
   }
