@@ -4,10 +4,23 @@
   command = "npm run build"
   publish = "dist"
 
+  # netlify.toml
 [[headers]]
-  for = "/*"
+  for = "/assets/remoteEntry.js"
   [headers.values]
+    Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-    Access-Control-Allow-Headers = "X-Requested-With, content-type, Authorization"
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Cache-Control = "no-cache, no-store"
+
+[[headers]]
+  for = "/assets/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+
+#[[headers]]
+ # for = "/*"
+ # [headers.values]
+  #  Access-Control-Allow-Origin = "*"
+  #  Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  #  Access-Control-Allow-Headers = "X-Requested-With, content-type, Authorization"
+  #  Cache-Control = "public, max-age=0, must-revalidate"
