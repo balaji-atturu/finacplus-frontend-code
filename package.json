@@ -5,7 +5,7 @@
   "description": "FinacPlus micro-frontend application",
   "workspaces": [
     "main-app",
-    "music-library"
+    "music-library-app"
   ],
   "scripts": {
     "start": "concurrently \"npm run start:main\" \"npm run start:music\"",

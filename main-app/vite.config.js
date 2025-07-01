@@ -76,7 +76,7 @@ export default defineConfig(({ mode }) => {
       federation({
         name: 'main_app',
         remotes: {
-          musicLibrary: 'https://your-music-library.netlify.app/assets/remoteEntry.js'
+          musicLibrary: 'https://music-library-separate.netlify.app/assets/remoteEntry.js'
         },
         shared: ['react', 'react-dom', 'react-router-dom', 'lodash']
       })
