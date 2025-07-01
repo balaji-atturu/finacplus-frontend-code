@@ -1,9 +1,26 @@
+# [build]
+# command = "npm run build"
+#  publish = "dist"
+
+# [[headers]]
+#  for = "/assets/remoteEntry.js"
+#  [headers.values]
+#    Content-Type = "application/javascript"
+#    Access-Control-Allow-Origin = "*"
+
 [build]
   command = "npm run build"
   publish = "dist"
 
 [[headers]]
-  for = "/assets/remoteEntry.js"
+  for = "/assets/*"
   [headers.values]
     Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+[[redirects]]
+  from = "/remoteEntry.js"
+  to = "/assets/remoteEntry.js"
+  status = 200
