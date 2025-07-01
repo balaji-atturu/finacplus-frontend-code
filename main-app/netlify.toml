@@ -1,15 +1,7 @@
-
-
-  [build]
-  command = "npm install && npm run build"
+[build]
+  command = "npm run build"
   publish = "dist"
-  
-[build.environment]
-  NODE_ENV = "production"
-  VITE_MUSIC_LIBRARY_URL = "https://music-library-separate.netlify.app"
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, OPTIONS"
+  environment = { 
+    NODE_ENV = "production",
+    VITE_MUSIC_LIBRARY_URL = "https://music-library-separate.netlify.app"
+  }

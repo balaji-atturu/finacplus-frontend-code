@@ -361,60 +361,60 @@
 
 
 
-// import React, { useState, useEffect, Suspense } from 'react';
-// import { login, isAuthenticated, getRole, logout } from './auth';
-// import './App.css';
-
-// console.log('Attempting to load remote...');
-// const MusicLibrary = React.lazy(() => import('musicLibrary/MusicLibrary')
-//   .then(module => {
-//     console.log('✅ Remote loaded successfully!', module);
-//     return module;
-//   })
-//   .catch(err => {
-//     console.error('❌ Remote load failed!', err);
-//     throw err;
-//   })
-// );
-
 import React, { useState, useEffect, Suspense } from 'react';
 import { login, isAuthenticated, getRole, logout } from './auth';
 import './App.css';
 
-const MusicLibrary = React.lazy(() => {
-  // 1. First ensure the remote entry is loaded
-  return new Promise((resolve, reject) => {
-    const remoteUrl = 'https://music-library-separate.netlify.app/assets/remoteEntry.js';
-    console.log(`🔄 Attempting to load remote from ${remoteUrl}`);
+console.log('Attempting to load remote...');
+const MusicLibrary = React.lazy(() => import('musicLibrary/MusicLibrary')
+  .then(module => {
+    console.log('✅ Remote loaded successfully!', module);
+    return module;
+  })
+  .catch(err => {
+    console.error('❌ Remote load failed!', err);
+    throw err;
+  })
+);
 
-    // Create script tag to load remoteEntry.js
-    const script = document.createElement('script');
-    script.src = remoteUrl;
-    script.async = true;
+// import React, { useState, useEffect, Suspense } from 'react';
+// import { login, isAuthenticated, getRole, logout } from './auth';
+// import './App.css';
 
-    script.onload = () => {
-      console.log('✅ remoteEntry.js loaded successfully');
-      // Now attempt to import the component
-      import('musicLibrary/MusicLibrary')
-        .then(module => {
-          console.log('🎉 MusicLibrary module loaded:', module);
-          resolve(module);
-        })
-        .catch(moduleErr => {
-          console.error('❌ Failed to load MusicLibrary module:', moduleErr);
-          reject(moduleErr);
-        });
-    };
+// const MusicLibrary = React.lazy(() => {
+//   // 1. First ensure the remote entry is loaded
+//   return new Promise((resolve, reject) => {
+//     const remoteUrl = 'https://music-library-separate.netlify.app/assets/remoteEntry.js';
+//     console.log(`🔄 Attempting to load remote from ${remoteUrl}`);
 
-    script.onerror = (scriptErr) => {
-      console.error('❌ Failed to load remoteEntry.js:', scriptErr);
-      reject(new Error(`Failed to load remote entry from ${remoteUrl}`));
-    };
+//     // Create script tag to load remoteEntry.js
+//     const script = document.createElement('script');
+//     script.src = remoteUrl;
+//     script.async = true;
 
-    // Add to document
-    document.head.appendChild(script);
-  });
-});
+//     script.onload = () => {
+//       console.log('✅ remoteEntry.js loaded successfully');
+//       // Now attempt to import the component
+//       import('musicLibrary/MusicLibrary')
+//         .then(module => {
+//           console.log('🎉 MusicLibrary module loaded:', module);
+//           resolve(module);
+//         })
+//         .catch(moduleErr => {
+//           console.error('❌ Failed to load MusicLibrary module:', moduleErr);
+//           reject(moduleErr);
+//         });
+//     };
+
+//     script.onerror = (scriptErr) => {
+//       console.error('❌ Failed to load remoteEntry.js:', scriptErr);
+//       reject(new Error(`Failed to load remote entry from ${remoteUrl}`));
+//     };
+
+//     // Add to document
+//     document.head.appendChild(script);
+//   });
+// });
 
 class ErrorBoundary extends React.Component {
   constructor(props) {

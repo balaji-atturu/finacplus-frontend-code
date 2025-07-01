@@ -221,55 +221,55 @@
 // });
 
 
-// import { defineConfig } from 'vite';
-// import react from '@vitejs/plugin-react';
-// import federation from '@originjs/vite-plugin-federation';
-// import path from 'path';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import federation from '@originjs/vite-plugin-federation';
+import path from 'path';
 
-// export default defineConfig({
-//   plugins: [
-//     react({
-//       babel: {
-//         plugins: [
-//           ['babel-plugin-react-css-modules', {
-//             generateScopedName: '[name]__[local]___[hash:base64:5]',
-//             filetypes: { '.css': { syntax: 'postcss' } }
-//           }]
-//         ]
-//       }
-//     }),
-//     federation({
-//       name: 'musicLibrary',
-//       filename: 'remoteEntry.js',
-//       exposes: { './MusicLibrary': './src/components/MusicLibrary.jsx' },
-//       shared: ['react', 'react-dom', 'lodash']
-//     })
-//   ],
-//   base: '/',
-//   cssPreprocessOptions: {
-//     postcss: { plugins: [] } // Initialize PostCSS
-//   },
-//   build: {
-//     target: 'esnext',
-//     outDir: 'dist',
-//     cssCodeSplit: true,
-//     assetsInlineLimit: 0,
-//     rollupOptions: {
-//       input: {
-//         main: path.resolve(__dirname, 'index.html'),
-//         styles: path.resolve(__dirname, 'src/App.css') // Explicit CSS entry
-//       },
-//       output: {
-//         assetFileNames: 'assets/[name].[hash].[ext]'
-//       }
-//     }
-//   },
-//   resolve: {
-//     alias: {
-//       '@': path.resolve(__dirname, 'src')
-//     }
-//   }
-// });
+export default defineConfig({
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          ['babel-plugin-react-css-modules', {
+            generateScopedName: '[name]__[local]___[hash:base64:5]',
+            filetypes: { '.css': { syntax: 'postcss' } }
+          }]
+        ]
+      }
+    }),
+    federation({
+      name: 'musicLibrary',
+      filename: 'remoteEntry.js',
+      exposes: { './MusicLibrary': './src/components/MusicLibrary.jsx' },
+      shared: ['react', 'react-dom', 'lodash']
+    })
+  ],
+  base: '/',
+  cssPreprocessOptions: {
+    postcss: { plugins: [] } // Initialize PostCSS
+  },
+  build: {
+    target: 'esnext',
+    outDir: 'dist',
+    cssCodeSplit: true,
+    assetsInlineLimit: 0,
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        styles: path.resolve(__dirname, 'src/App.css') // Explicit CSS entry
+      },
+      output: {
+        assetFileNames: 'assets/[name].[hash].[ext]'
+      }
+    }
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  }
+});
 
 
 
@@ -279,34 +279,34 @@
 
 
 
-// vite.config.js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import federation from '@originjs/vite-plugin-federation';
+// // vite.config.js
+// import { defineConfig } from 'vite';
+// import react from '@vitejs/plugin-react';
+// import federation from '@originjs/vite-plugin-federation';
 
-export default defineConfig({
-  plugins: [
-    react(),
-    federation({
-      name: 'musicLibrary',
-      filename: 'remoteEntry.js', // Must match exactly
-      exposes: {
-        './MusicLibrary': './src/components/MusicLibrary.jsx'
-      },
-      shared: ['react', 'react-dom', 'lodash']
-    })
-  ],
-  build: {
-    rollupOptions: {
-      output: {
-        // Critical change: Fixed filename without hash
-        entryFileNames: 'assets/remoteEntry.js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]'
-      }
-    }
-  }
-});
+// export default defineConfig({
+//   plugins: [
+//     react(),
+//     federation({
+//       name: 'musicLibrary',
+//       filename: 'remoteEntry.js', // Must match exactly
+//       exposes: {
+//         './MusicLibrary': './src/components/MusicLibrary.jsx'
+//       },
+//       shared: ['react', 'react-dom', 'lodash']
+//     })
+//   ],
+//   build: {
+//     rollupOptions: {
+//       output: {
+//         // Critical change: Fixed filename without hash
+//         entryFileNames: 'assets/remoteEntry.js',
+//         chunkFileNames: 'assets/[name].js',
+//         assetFileNames: 'assets/[name].[ext]'
+//       }
+//     }
+//   }
+// });
 
 
 
