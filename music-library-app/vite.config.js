@@ -480,12 +480,12 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
-    cssCodeSplit: false, // Disable CSS splitting
+    cssCodeSplit: false, // Critical: Disable CSS splitting
     rollupOptions: {
       output: {
         entryFileNames: 'remoteEntry.js', // Fixed name
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]'
+        chunkFileNames: '[name].js', // No hash
+        assetFileNames: '[name].[ext]' // Simple naming
       }
     }
   }

@@ -15,14 +15,21 @@
   command = "npm run build"
   publish = "dist"
 
+# Keep your working JS headers
 [[headers]]
   for = "/remoteEntry.js"
   [headers.values]
     Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
-    Cache-Control = "no-store"
+    Cache-Control = "no-store"  # Your proven working setting
 
 [[headers]]
   for = "/*.js"
   [headers.values]
     Content-Type = "application/javascript"
+
+# Only add this ONE new header as insurance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"  # The only critical addition
