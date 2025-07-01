@@ -1,6 +1,6 @@
 
   
-import '../App.css';
+import './Styles1.css';
 
 const SongCard = ({ song, onDelete }) => {
   return (

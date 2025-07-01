@@ -196,10 +196,16 @@ export default defineConfig({
         main: './index.html',
         styles: './src/App.css'  // Explicit CSS entry
       },
-      output: {
+         output: {
+      assetFileNames: (assetInfo) => {
+        if (assetInfo.name.endsWith('.css')) {
+          return 'assets/[name].[hash][extname]' // Keep original filenames
+        }
+        return 'assets/[name].[hash][extname]'
+      },
+   
         entryFileNames: 'assets/[name].[hash].js',
         chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash].[ext]',
         format: 'esm',
         globals: {
           'lodash': '_'

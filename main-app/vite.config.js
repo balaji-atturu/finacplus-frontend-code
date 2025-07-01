@@ -172,6 +172,15 @@ export default defineConfig(({ mode }) => {
     devSourcemap: true,  // Better debugging
     modules: {
       localsConvention: 'camelCase'
+    
+  },
+     output: {
+      assetFileNames: (assetInfo) => {
+        if (assetInfo.name.endsWith('.css')) {
+          return 'assets/[name].[hash][extname]' // Keep original filenames
+        }
+        return 'assets/[name].[hash][extname]'
+      }
     }
   },
         output: {

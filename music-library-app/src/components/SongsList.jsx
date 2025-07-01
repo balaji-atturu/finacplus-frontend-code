@@ -450,7 +450,7 @@
 import { useState, useMemo } from 'react';
 import { songs as initialSongs } from '../mockSongs';
 import SongCard from './SongCard';
-import '../App.css';
+import './Styles1.css';
 
 const SongsList = ({ role }) => {
   const [songs, setSongs] = useState(initialSongs);
