@@ -363,8 +363,8 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { login, isAuthenticated, getRole, logout } from './auth';
-import './components/Styles.css';
-
+//import './components/Styles.css';
+import './App.css';
 console.log('Attempting to load remote...');
 const MusicLibrary = React.lazy(() => import('musicLibrary/MusicLibrary')
   .then(module => {
