@@ -1,13 +1,11 @@
 [build]
   command = "npm run build"
   publish = "dist"
-  environment = { NODE_ENV = "production" }
 
 [[headers]]
-  for = "/assets/*"
+  for = "/*"
   [headers.values]
-    Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
-
-   
-
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    Access-Control-Allow-Headers = "X-Requested-With, content-type, Authorization"
+    Cache-Control = "public, max-age=0, must-revalidate"

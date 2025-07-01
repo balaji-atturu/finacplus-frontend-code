@@ -272,87 +272,56 @@
 // });
 
 
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 
 export default defineConfig({
   plugins: [
-    react({
-      // CSS modules support
-      babel: {
-        plugins: [
-          ['babel-plugin-react-css-modules', {
-            generateScopedName: '[name]__[local]___[hash:base64:5]'
-          }]
-        ]
-      }
-    }),
+    react(),
     federation({
       name: 'musicLibrary',
       filename: 'remoteEntry.js',
       exposes: {
         './MusicLibrary': './src/components/MusicLibrary.jsx'
       },
-      shared: [
-        'react',
-        'react-dom',
-        'lodash'
-      ]
+      shared: ['react', 'react-dom', 'lodash']
     })
   ],
   base: '/',
+  build: {
+    target: 'esnext',
+    modulePreload: false,
+    minify: false,
+    cssCodeSplit: false,
+    rollupOptions: {
+      output: {
+        format: 'esm',
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]',
+        globals: {
+          'react': 'React',
+          'react-dom': 'ReactDOM',
+          'lodash': '_'
+        }
+      }
+    }
+  },
   server: {
     port: 5001,
-    strictPort: true,
+    cors: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type"
-    },
-    hmr: {
-      protocol: 'ws',
-      host: 'localhost'
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
     }
   },
   preview: {
     port: 5001,
+    cors: true,
     headers: {
       "Access-Control-Allow-Origin": "*"
-    }
-  },
-  build: {
-    target: 'esnext',
-    outDir: 'dist',
-    minify: 'terser',
-    // CSS-specific configurations
-    cssCodeSplit: true,
-    cssMinify: true,
-    assetsInlineLimit: 0,
-    sourcemap: true,
-    rollupOptions: {
-     
-      output: {
-        entryFileNames: 'assets/[name].[hash].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash].[ext]',
-        format: 'esm',
-        globals: {
-          'lodash': '_'
-        }
-      },
-      external: ['lodash']
-    }
-  },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'lodash'],
-    exclude: ['federation-runtime']
-  },
-  css: {
-    modules: {
-      localsConvention: 'camelCase',
-      generateScopedName: '[name]__[local]___[hash:base64:5]'
     }
   }
 });
