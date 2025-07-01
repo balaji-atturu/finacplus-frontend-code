@@ -1,6 +1,6 @@
 import React from 'react';
 import SongsList from './components/SongsList';
-import './App.css';  // Assuming you have an App.css file
+import './App.css';  
 
 const App = ({ role }) => {  // Receive role as prop
   return (

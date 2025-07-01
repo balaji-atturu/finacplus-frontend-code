@@ -528,7 +528,7 @@ const App = () => {
               ⏳ Loading Music Library...
             </div>
           }>
-            <MusicLibrary />
+            <MusicLibrary role={role}/>
           </Suspense>
         </ErrorBoundary>
       </div>

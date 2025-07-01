@@ -446,7 +446,7 @@
 
 
 
-
+import React from 'react';
 import { useState, useMemo } from 'react';
 import { songs as initialSongs } from '../mockSongs';
 import SongCard from './SongCard';
