@@ -479,7 +479,8 @@ export default defineConfig({
     })
   ],
   build: {
-    target: 'esnext',
+   target: 'esnext',
+    modulePreload: false
     // cssCodeSplit: false, // Critical: Disable CSS splitting
     // rollupOptions: {
     //   output: {
