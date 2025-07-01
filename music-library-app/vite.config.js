@@ -1,54 +1,54 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import federation from '@originjs/vite-plugin-federation';
+// import { defineConfig } from 'vite';
+// import react from '@vitejs/plugin-react';
+// import federation from '@originjs/vite-plugin-federation';
 
-export default defineConfig({
-  plugins: [
-    react(),
-    federation({
-      name: 'musicLibrary',
-      filename: 'remoteEntry.js', // Critical for Module Federation
-      exposes: {
-        './MusicLibrary': './src/components/MusicLibrary.jsx'
-      },
-      shared: ['react', 'react-dom','lodash']
-    })
-  ],
-  base: '/', // Required for proper asset paths
-  server: {
-    port: 5001,
-    strictPort: true,
-    headers: {
-      "Access-Control-Allow-Origin": "*" // Enable CORS for dev
-    }
-  },
-  preview: {
-    port: 5002,
-    headers: {
-      "Access-Control-Allow-Origin": "*" // Enable CORS for preview
-    }
-  },
-  build: {
-    target: 'esnext', // Required for federation
-    outDir: 'dist',
-    emptyOutDir: true,
-    cssCodeSplit: true, // Prevent CSS issues
-    rollupOptions: {
-      output: {
-        // Critical for proper file structure
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]',
-        // Ensure federation files are properly named
-        format: 'esm' // ES Modules format
-      }
-    }
-  },
-  optimizeDeps: {
-    include: ['react', 'react-dom'], // Pre-bundle dependencies
-    exclude: ['federation-runtime'] // Required for Module Federation
-  }
-});
+// export default defineConfig({
+//   plugins: [
+//     react(),
+//     federation({
+//       name: 'musicLibrary',
+//       filename: 'remoteEntry.js', // Critical for Module Federation
+//       exposes: {
+//         './MusicLibrary': './src/components/MusicLibrary.jsx'
+//       },
+//       shared: ['react', 'react-dom','lodash']
+//     })
+//   ],
+//   base: '/', // Required for proper asset paths
+//   server: {
+//     port: 5001,
+//     strictPort: true,
+//     headers: {
+//       "Access-Control-Allow-Origin": "*" // Enable CORS for dev
+//     }
+//   },
+//   preview: {
+//     port: 5002,
+//     headers: {
+//       "Access-Control-Allow-Origin": "*" // Enable CORS for preview
+//     }
+//   },
+//   build: {
+//     target: 'esnext', // Required for federation
+//     outDir: 'dist',
+//     emptyOutDir: true,
+//     cssCodeSplit: false, // Prevent CSS issues
+//     rollupOptions: {
+//       output: {
+//         // Critical for proper file structure
+//         entryFileNames: 'assets/[name].js',
+//         chunkFileNames: 'assets/[name].js',
+//         assetFileNames: 'assets/[name].[ext]',
+//         // Ensure federation files are properly named
+//         format: 'esm' // ES Modules format
+//       }
+//     }
+//   },
+//   optimizeDeps: {
+//     include: ['react', 'react-dom'], // Pre-bundle dependencies
+//     exclude: ['federation-runtime'] // Required for Module Federation
+//   }
+// });
 
 // import { defineConfig } from 'vite';
 // import react from '@vitejs/plugin-react';
@@ -196,16 +196,10 @@ export default defineConfig({
 //         main: './index.html',
 //         styles: './src/App.css'  // Explicit CSS entry
 //       },
-//          output: {
-//       assetFileNames: (assetInfo) => {
-//         if (assetInfo.name.endsWith('.css')) {
-//           return 'assets/[name].[hash][extname]' // Keep original filenames
-//         }
-//         return 'assets/[name].[hash][extname]'
-//       },
-   
+//       output: {
 //         entryFileNames: 'assets/[name].[hash].js',
 //         chunkFileNames: 'assets/[name].[hash].js',
+//         assetFileNames: 'assets/[name].[hash].[ext]',
 //         format: 'esm',
 //         globals: {
 //           'lodash': '_'
@@ -226,36 +220,6 @@ export default defineConfig({
 //   }
 // });
 
-
-// import { defineConfig } from 'vite';
-// import react from '@vitejs/plugin-react';
-// import federation from '@originjs/vite-plugin-federation';
-
-// export default defineConfig({
-//   plugins: [
-//     react(),
-//     federation({
-//       name: 'musicLibrary',
-//       filename: 'remoteEntry.js', // Required to expose code
-//       exposes: {
-//         './MusicLibrary': './src/components/MusicLibrary.jsx'
-//       },
-//       // No remotes - pure remote module
-//       shared: ['react', 'react-dom']
-//     })
-//   ],
-//   server: {
-//     port: 5001,
-//     strictPort: true
-//   },
-//   preview: {
-//     port: 5002,
-//     strictPort: true
-//   },
-//   build: {
-//     target: 'esnext'
-//   }
-// });
 
 // import { defineConfig } from 'vite';
 // import react from '@vitejs/plugin-react';
@@ -306,3 +270,92 @@ export default defineConfig({
 //     }
 //   }
 // });
+
+
+
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import federation from '@originjs/vite-plugin-federation';
+
+export default defineConfig({
+  plugins: [
+    react({
+      // CSS modules support
+      babel: {
+        plugins: [
+          ['babel-plugin-react-css-modules', {
+            generateScopedName: '[name]__[local]___[hash:base64:5]'
+          }]
+        ]
+      }
+    }),
+    federation({
+      name: 'musicLibrary',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './MusicLibrary': './src/components/MusicLibrary.jsx'
+      },
+      shared: [
+        'react',
+        'react-dom',
+        'lodash'
+      ]
+    })
+  ],
+  base: '/',
+  server: {
+    port: 5001,
+    strictPort: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type"
+    },
+    hmr: {
+      protocol: 'ws',
+      host: 'localhost'
+    }
+  },
+  preview: {
+    port: 5001,
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
+  },
+  build: {
+    target: 'esnext',
+    outDir: 'dist',
+    minify: 'terser',
+    // CSS-specific configurations
+    cssCodeSplit: true,
+    cssMinify: true,
+    assetsInlineLimit: 0,
+    sourcemap: true,
+    rollupOptions: {
+       input: {
+        main: './index.html',
+        styles: './src/App.css'  // Explicit CSS entry
+      },
+      output: {
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]',
+        format: 'esm',
+        globals: {
+          'lodash': '_'
+        }
+      },
+      external: ['lodash']
+    }
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'lodash'],
+    exclude: ['federation-runtime']
+  },
+  css: {
+    modules: {
+      localsConvention: 'camelCase',
+      generateScopedName: '[name]__[local]___[hash:base64:5]'
+    }
+  }
+});

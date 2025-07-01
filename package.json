@@ -10,13 +10,13 @@
   "scripts": {
     "start": "concurrently \"npm run start:main\" \"npm run start:music\"",
     "start:main": "cd main-app && npm run dev",
-    "start:music": "cd music-library-app && npm run dev",
+    "start:music": "cd music-library && npm run dev",
     "build": "concurrently \"npm run build:main\" \"npm run build:music\"",
     "build:main": "cd main-app && npm run build",
-    "build:music": "cd music-library-app && npm run build",
+    "build:music": "cd music-library && npm run build",
     "preview": "concurrently \"npm run preview:main\" \"npm run preview:music\"",
     "preview:main": "cd main-app && npm run preview",
-    "preview:music": "cd music-library-app && npm run preview"
+    "preview:music": "cd music-library && npm run preview"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

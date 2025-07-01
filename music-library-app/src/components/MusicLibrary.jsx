@@ -1,6 +1,5 @@
 import React from 'react';
 import App from '../App';
-//import './Styles1.css';
 import '../App.css';
 
 const MusicLibrary = () => {  // Receive role as prop

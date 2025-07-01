@@ -65,62 +65,6 @@
 
 // 
 
-import { defineConfig, loadEnv } from 'vite';
-import react from '@vitejs/plugin-react';
-import federation from '@originjs/vite-plugin-federation';
-
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), 'VITE_');
-  
-  return {
-    plugins: [
-      react(),
-      federation({
-        name: 'main_app',
-        remotes: {
-          musicLibrary: 'https://music-library-separate.netlify.app/assets/remoteEntry.js'
-        },
-        shared: ['react', 'react-dom', 'react-router-dom', 'lodash']
-      })
-    ],
-    base: '/',
-    server: {
-      port: 5000,
-      strictPort: true,
-      cors: true,
-      hmr: {
-        protocol: 'ws',
-        host: 'localhost'
-      }
-    },
-    build: {
-      target: 'esnext',
-      outDir: 'dist',
-      minify: 'terser',
-      // CSS-specific configurations
-      cssCodeSplit: true,
-      cssMinify: true,
-      assetsInlineLimit: 0,
-      rollupOptions: {
-        output: {
-          format: 'esm',
-          assetFileNames: 'assets/[name].[hash].[ext]',
-          chunkFileNames: 'assets/[name].[hash].js',
-          entryFileNames: 'assets/[name].[hash].js',
-          globals: {
-            'lodash': '_'
-          }
-        }
-      }
-    },
-    optimizeDeps: {
-      include: ['react', 'react-dom', 'react-router-dom', 'lodash'],
-      exclude: ['js-big-decimal']
-    }
-  };
-});
-
-
 // import { defineConfig, loadEnv } from 'vite';
 // import react from '@vitejs/plugin-react';
 // import federation from '@originjs/vite-plugin-federation';
@@ -130,16 +74,7 @@ export default defineConfig(({ mode }) => {
   
 //   return {
 //     plugins: [
-//       react({
-//         // CSS modules support
-//         babel: {
-//           plugins: [
-//             ['babel-plugin-react-css-modules', {
-//               generateScopedName: '[name]__[local]___[hash:base64:5]'
-//             }]
-//           ]
-//         }
-//       }),
+//       react(),
 //       federation({
 //         name: 'main_app',
 //         remotes: {
@@ -165,24 +100,8 @@ export default defineConfig(({ mode }) => {
 //       // CSS-specific configurations
 //       cssCodeSplit: true,
 //       cssMinify: true,
-//       assetsInlineLimit: 0, // Force CSS into separate files
-//       sourcemap: true, // For debugging CSS in production
+//       assetsInlineLimit: 0,
 //       rollupOptions: {
-//           css: {
-//     devSourcemap: true,  // Better debugging
-//     modules: {
-//       localsConvention: 'camelCase'
-    
-//   },
-//      output: {
-//       assetFileNames: (assetInfo) => {
-//         if (assetInfo.name.endsWith('.css')) {
-//           return 'assets/[name].[hash][extname]' // Keep original filenames
-//         }
-//         return 'assets/[name].[hash][extname]'
-//       }
-//     }
-//   },
 //         output: {
 //           format: 'esm',
 //           assetFileNames: 'assets/[name].[hash].[ext]',
@@ -197,18 +116,89 @@ export default defineConfig(({ mode }) => {
 //     optimizeDeps: {
 //       include: ['react', 'react-dom', 'react-router-dom', 'lodash'],
 //       exclude: ['js-big-decimal']
-//     },
-//     css: {
-//       modules: {
-//         localsConvention: 'camelCase',
-//         generateScopedName: '[name]__[local]___[hash:base64:5]'
-//       }
 //     }
 //   };
 // });
 
 
-//import { defineConfig, loadEnv } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
+import federation from '@originjs/vite-plugin-federation';
+
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), 'VITE_');
+
+  return {
+    plugins: [
+      react({
+        // CSS modules support
+        babel: {
+          plugins: [
+            ['babel-plugin-react-css-modules', {
+              generateScopedName: '[name]__[local]___[hash:base64:5]'
+            }]
+          ]
+        }
+      }),
+      federation({
+        name: 'main_app',
+        remotes: {
+          musicLibrary: 'https://music-library-separate.netlify.app/assets/remoteEntry.js'
+        },
+        shared: ['react', 'react-dom', 'react-router-dom', 'lodash']
+      })
+    ],
+    base: '/',
+    server: {
+      port: 5000,
+      strictPort: true,
+      cors: true,
+      hmr: {
+        protocol: 'ws',
+        host: 'localhost'
+      }
+    },
+    build: {
+      target: 'esnext',
+      outDir: 'dist',
+      minify: 'terser',
+      // CSS-specific configurations
+      cssCodeSplit: true,
+      cssMinify: true,
+      assetsInlineLimit: 0, // Force CSS into separate files
+      sourcemap: true, // For debugging CSS in production
+      rollupOptions: {
+          css: {
+    devSourcemap: true,  // Better debugging
+    modules: {
+      localsConvention: 'camelCase'
+    }
+  },
+        output: {
+          format: 'esm',
+          assetFileNames: 'assets/[name].[hash].[ext]',
+          chunkFileNames: 'assets/[name].[hash].js',
+          entryFileNames: 'assets/[name].[hash].js',
+          globals: {
+            'lodash': '_'
+          }
+        }
+      }
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'react-router-dom', 'lodash'],
+      exclude: ['js-big-decimal']
+    },
+    css: {
+      modules: {
+        localsConvention: 'camelCase',
+        generateScopedName: '[name]__[local]___[hash:base64:5]'
+      }
+    }
+  };
+});
+
+// import { defineConfig, loadEnv } from 'vite';
 // import react from '@vitejs/plugin-react';
 // import federation from '@originjs/vite-plugin-federation';
 // import path from 'path';

@@ -1,7 +1,6 @@
 // components/LoginForm.jsx
 import React from 'react';
-//import './Styles.css';
-import '../App.css';
+import '../App.css'
 const LoginForm = ({ username, password, onUsernameChange, onPasswordChange, onSubmit }) => {
   return (
     <form className="login-form" onSubmit={onSubmit}>
