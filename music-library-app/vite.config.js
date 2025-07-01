@@ -22,7 +22,6 @@
 //   }
 // });
 
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
@@ -40,21 +39,16 @@ export default defineConfig({
     })
   ],
   build: {
-    modulePreload: false,
     target: 'esnext',
     minify: false,
-    cssCodeSplit: true, // Changed back to true with proper handling
+    cssCodeSplit: false, // Critical fix
     rollupOptions: {
       output: {
-        format: 'esm',
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]' // Proper extension handling
+        entryFileNames: 'remoteEntry.js',
+        assetFileNames: '[name].[ext]', // Fixes asset paths
+        format: 'esm'
       }
     }
   },
-  base: '/', // Changed from '/assets/' to prevent double assets path
-  optimizeDeps: {
-    include: ['react', 'react-dom'] // Ensure proper dependency handling
-  }
+  base: './' // Absolute critical fix
 });

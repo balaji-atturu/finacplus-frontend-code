@@ -30,20 +30,14 @@ export default defineConfig({
     federation({
       name: 'main-app',
       remotes: {
-        musicLibrary: 'https://music-library-separate.netlify.app/remoteEntry.js' // Removed /assets/
+        musicLibrary: 'https://music-library-separate.netlify.app/remoteEntry.js' 
       },
       shared: ['react', 'react-dom']
     })
   ],
   build: {
-    modulePreload: false,
     target: 'esnext',
     minify: false,
     cssCodeSplit: false
-  },
-  server: {
-    fs: {
-      strict: false
-    }
   }
 });

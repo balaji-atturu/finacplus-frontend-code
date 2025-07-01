@@ -13,23 +13,18 @@
   publish = "dist"
 
 [[headers]]
-  for = "/assets/*.js"
+  for = "/*.js"
   [headers.values]
     Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
 
 [[headers]]
-  for = "/assets/*.css"
+  for = "/*.css"
   [headers.values]
     Content-Type = "text/css"
     Access-Control-Allow-Origin = "*"
 
-[[redirects]]
-  from = "/remoteEntry.js"
-  to = "/assets/remoteEntry.js"
-  status = 200
-
-[[redirects]]
-  from = "/assets/assets/*"
-  to = "/assets/:splat"
-  status = 200
+[[headers]]
+  for = "/remoteEntry.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
