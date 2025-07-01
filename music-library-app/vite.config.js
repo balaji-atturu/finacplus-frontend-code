@@ -41,7 +41,7 @@ export default defineConfig({
   build: {
     target: 'esnext',
     minify: false,
-    cssCodeSplit: false, // Critical fix
+    cssCodeSplit: true, // Critical fix
     rollupOptions: {
       output: {
         entryFileNames: 'remoteEntry.js',
