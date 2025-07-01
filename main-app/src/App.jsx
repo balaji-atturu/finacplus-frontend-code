@@ -544,7 +544,7 @@ const App = () => {
             <div style={{
               padding: '12px',
               textAlign: 'center',
-              backgroundColor:'blue',
+              backgroundColor:"aliceblue",
               color: 'red',
               fontWeight: 'bold',
               fontSize: '16px'
