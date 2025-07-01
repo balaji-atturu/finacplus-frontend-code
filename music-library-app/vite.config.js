@@ -433,6 +433,36 @@
 // });
 
 
+// import { defineConfig } from 'vite';
+// import react from '@vitejs/plugin-react';
+// import federation from '@originjs/vite-plugin-federation';
+
+// export default defineConfig({
+//   plugins: [
+//     react(),
+//     federation({
+//       name: 'musicLibrary',
+//       filename: 'remoteEntry.js',
+//       exposes: {
+//         './MusicLibrary': './src/components/MusicLibrary.jsx'
+//       },
+//       shared: ['react', 'react-dom']
+//     })
+//   ],
+//   build: {
+//     target: 'esnext',
+//     cssCodeSplit: true,
+//     rollupOptions: {
+//       output: {
+//         entryFileNames: 'assets/[name].js',
+//         chunkFileNames: 'assets/[name].js',
+//         assetFileNames: 'assets/[name].[ext]'
+//       }
+//     }
+//   }
+// });
+
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
@@ -451,7 +481,7 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
-    cssCodeSplit: true,
+    cssCodeSplit: false, // Disable CSS splitting
     rollupOptions: {
       output: {
         entryFileNames: 'assets/[name].js',

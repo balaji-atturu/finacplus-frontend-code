@@ -355,32 +355,32 @@
  import './App.css';
 
 const MusicLibrary = React.lazy(() => {
-  const remoteUrl = 'https://music-library-separate.netlify.app/assets/remoteEntry.js';
-  
   return new Promise((resolve) => {
+    // First load the remote entry
     const script = document.createElement('script');
-    script.src = remoteUrl;
+    script.src = 'https://music-library-separate.netlify.app/assets/remoteEntry.js';
+    
     script.onload = () => {
-      // Manually handle the module import
-      window.__federation_import__('musicLibrary/MusicLibrary')
-        .then(module => resolve(module))
+      // Then use the standard import() function
+      import('musicLibrary/MusicLibrary')
+        .then(module => {
+          console.log('✅ Remote module loaded successfully');
+          resolve(module);
+        })
         .catch(err => {
-          console.error('Failed to load module:', err);
+          console.error('❌ Failed to load module:', err);
           throw err;
         });
     };
+    
     script.onerror = (err) => {
-      console.error('Failed to load remote entry:', err);
-      throw err;
+      console.error('❌ Failed to load remote entry:', err);
+      throw new Error('Failed to load remote entry');
     };
+    
     document.head.appendChild(script);
   });
 });
-
-
-
-
-
 
 
 

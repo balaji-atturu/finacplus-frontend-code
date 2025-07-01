@@ -20,15 +20,9 @@
   [headers.values]
     Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
-    Cache-Control = "no-cache, no-store"
+    Cache-Control = "no-store"
 
 [[headers]]
   for = "/assets/*.js"
   [headers.values]
     Content-Type = "application/javascript"
-
-[[headers]]
-  for = "/assets/*.css"
-  [headers.values]
-    Content-Type = "text/css"
-    Access-Control-Allow-Origin = "*"
