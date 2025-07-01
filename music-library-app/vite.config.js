@@ -43,15 +43,18 @@ export default defineConfig({
     modulePreload: false,
     target: 'esnext',
     minify: false,
-    cssCodeSplit: false,
+    cssCodeSplit: true, // Changed back to true with proper handling
     rollupOptions: {
       output: {
-        format: 'esm', // Ensure ES module format
+        format: 'esm',
         entryFileNames: 'assets/[name].js',
         chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]'
+        assetFileNames: 'assets/[name].[ext]' // Proper extension handling
       }
     }
   },
-  base: '/assets/' // Add this to ensure correct asset paths
+  base: '/', // Changed from '/assets/' to prevent double assets path
+  optimizeDeps: {
+    include: ['react', 'react-dom'] // Ensure proper dependency handling
+  }
 });
