@@ -9,7 +9,7 @@ export default defineConfig({
       name: 'main-app',
       remotes: {
         // Point to Vercel deployment (no hash)
-        'music-library': 'https://music-library-remotevercel-nmxkx3z9g-balajis-projects-39f6528d.vercel.app/assets/remoteEntry.js'
+        'music-library': 'https://music-library-remotevercelapp.vercel.app/assets/remoteEntry.js'
       },
       shared: ['react', 'react-dom']
     })
