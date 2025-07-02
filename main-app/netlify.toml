@@ -12,13 +12,6 @@
   command = "npm run build"
   publish = "dist"
 
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Content-Type = "application/javascript"
-    Cache-Control = "no-cache"
-
 [[redirects]]
   from = "/*"
   to = "/index.html"

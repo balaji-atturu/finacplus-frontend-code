@@ -38,6 +38,7 @@
 //   }
 // });
 
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
@@ -57,14 +58,22 @@ export default defineConfig({
   build: {
     modulePreload: false,
     target: 'esnext',
+    minify: true,
     cssCodeSplit: false,
     rollupOptions: {
       output: {
         format: 'esm',
-        entryFileNames: 'assets/[name].[hash].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash].[ext]'
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name].js',
+        assetFileNames: '[name].[ext]',
+        minifyInternalExports: false
       }
+    }
+  },
+  preview: {
+    port: 3001,
+    headers: {
+      "Access-Control-Allow-Origin": "*"
     }
   }
 });

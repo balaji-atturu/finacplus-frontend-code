@@ -24,15 +24,16 @@
   publish = "dist"
 
 [[headers]]
-  for = "/assets/*"
+  for = "/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
-    Content-Type = "application/javascript"
-    Cache-Control = "no-cache"
+    Access-Control-Allow-Methods = "GET,OPTIONS"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[[headers]]
+  for = "/assets/remoteEntry.js"
+  [headers.values]
+    Content-Type = "application/javascript"  # ✅ Force correct MIME type
+    Cache-Control = "no-cache"
+    Access-Control-Allow-Origin = "*"
 
 
