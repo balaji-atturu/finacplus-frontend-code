@@ -48,7 +48,7 @@ export default defineConfig({
     react(),
     federation({
       name: 'music-library',
-      filename: 'assets/remoteEntry.js', 
+      filename: 'remoteEntry.js', 
       exposes: {
         './MusicLibrary': './src/components/SongsList.jsx'
       },
