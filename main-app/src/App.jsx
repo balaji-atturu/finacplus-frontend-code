@@ -565,8 +565,11 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { login, isAuthenticated, getRole, logout } from './auth';
 import './App.css';
 
-const MusicLibrary = React.lazy(() => import('musicLibrary/MusicLibrary'));
-
+const MusicLibrary = React.lazy(() => 
+  import('musicLibrary/MusicLibrary').catch(() => ({ 
+    default: () => <div>Failed to load module</div> 
+  }))
+);
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);

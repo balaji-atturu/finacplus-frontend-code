@@ -29,7 +29,7 @@ export default defineConfig({
     federation({
       name: 'main-app',
       remotes: {
-        musicLibrary: 'http://localhost:5001/assets/remoteEntry.js'
+        musicLibrary: 'http://localhost:5001/remoteEntry.js'
       },
       shared: ['react', 'react-dom']
     })
@@ -40,11 +40,6 @@ export default defineConfig({
     cssCodeSplit: false
   },
   server: {
-    port: 5000,
-    cors: true
-  },
-  preview: {
-    port: 5000,
-    cors: true
+    port: 5000
   }
 });
