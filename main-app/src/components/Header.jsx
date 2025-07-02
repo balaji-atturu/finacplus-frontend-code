@@ -1,5 +1,4 @@
 import React from 'react';
-import '../App.css'
 
 const Header = () => (
   <h1 className="main-title">🎤 FinacPlus Main App</h1>

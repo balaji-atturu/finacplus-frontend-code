@@ -1,6 +1,5 @@
 import React from 'react';
 import SongsList from './components/SongsList';
-import './App.css';  
 
 const App = (role) => {  
   return (

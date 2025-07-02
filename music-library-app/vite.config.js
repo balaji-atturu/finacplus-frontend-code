@@ -48,7 +48,7 @@ export default defineConfig({
     react(),
     federation({
       name: 'music-library',
-      filename: 'remoteEntry.js', 
+      filename: 'remoteEntry.js',
       exposes: {
         './MusicLibrary': './src/components/SongsList.jsx'
       },
@@ -64,8 +64,9 @@ export default defineConfig({
       output: {
         format: 'esm',
         entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',         
-        assetFileNames: '[name].[ext]'      
+        chunkFileNames: '[name].js',
+        assetFileNames: '[name].[ext]',
+        minifyInternalExports: false
       }
     }
   },

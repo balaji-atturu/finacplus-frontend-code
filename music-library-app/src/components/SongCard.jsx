@@ -1,6 +1,5 @@
 
   import React from 'react';
-import '../styles/Styles1.css';
 
 const SongCard = ({ song }) => {
   return (

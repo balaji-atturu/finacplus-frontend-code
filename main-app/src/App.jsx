@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { login, isAuthenticated, getRole, logout } from './auth';
-import './App.css';
 
 console.log('Attempting to load remote...');
 const MusicLibrary = React.lazy(() => import('music-library/MusicLibrary')
