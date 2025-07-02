@@ -19,6 +19,7 @@
 //     minify: false
 //   }
 // });
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
@@ -29,7 +30,7 @@ export default defineConfig({
     federation({
       name: 'main-app',
       remotes: {
-        musicLibrary: 'http://localhost:5001/remoteEntry.js'
+        musicLibrary: 'https://music-library-separate.netlify.app/remoteEntry.js'
       },
       shared: ['react', 'react-dom']
     })
@@ -37,9 +38,6 @@ export default defineConfig({
   build: {
     target: 'esnext',
     minify: false,
-    cssCodeSplit: false
-  },
-  server: {
-    port: 5000
+    cssCodeSplit: true
   }
 });

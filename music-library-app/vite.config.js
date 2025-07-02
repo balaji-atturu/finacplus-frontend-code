@@ -40,32 +40,14 @@ export default defineConfig({
   build: {
     target: 'esnext',
     minify: false,
-    cssCodeSplit: false, // Critical for federation
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
-        format: 'esm',
-        entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]'
+        entryFileNames: 'remoteEntry.js',
+        assetFileNames: '[name].[ext]',
+        format: 'esm'
       }
     }
   },
-  server: {
-    port: 5001,
-    strictPort: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,OPTIONS',
-      'Content-Type': 'application/javascript'
-    }
-  },
-  preview: {
-    port: 5001,
-    strictPort: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,OPTIONS',
-      'Content-Type': 'application/javascript'
-    }
-  }
+  base: './' // Critical for Netlify
 });
