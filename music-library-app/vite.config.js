@@ -48,7 +48,7 @@ export default defineConfig({
     react(),
     federation({
       name: 'music-library',
-      filename: 'remoteEntry.js',
+      filename: 'remoteEntry.js', // Fixed filename (no hash)
       exposes: {
         './MusicLibrary': './src/components/SongsList.jsx'
       },
@@ -58,22 +58,14 @@ export default defineConfig({
   build: {
     modulePreload: false,
     target: 'esnext',
-    minify: true,
     cssCodeSplit: false,
     rollupOptions: {
       output: {
         format: 'esm',
-        entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]',
-        minifyInternalExports: false
+        entryFileNames: 'assets/[name].js', // No hash in filename
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
       }
-    }
-  },
-  preview: {
-    port: 3001,
-    headers: {
-      "Access-Control-Allow-Origin": "*"
     }
   }
 });
