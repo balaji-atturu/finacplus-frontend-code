@@ -1,3 +1,89 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+
+
+  import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import federation from '@originjs/vite-plugin-federation';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    federation({
+      name: 'music-library',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './MusicLibrary': './src/components/MusicLibrary.jsx'
+      },
+      shared: ['react', 'react-dom']
+    })
+  ],
+  build: {
+    target: 'esnext',
+    minify: false,
+    cssCodeSplit: true, // Critical fix
+    rollupOptions: {
+      output: {
+        entryFileNames: 'remoteEntry.js',
+        assetFileNames: '[name].[ext]', // Fixes asset paths
+        format: 'esm'
+      }
+    }
+  },
+  base: './' // Absolute critical fix
+});
+
+
+
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import federation from '@originjs/vite-plugin-federation';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    federation({
+      name: 'main-app',
+      remotes: {
+        musicLibrary: 'https://music-library-separate.netlify.app/remoteEntry.js' 
+      },
+      shared: ['react', 'react-dom']
+    })
+  ],
+  build: {
+    target: 'esnext',
+    minify: false,
+    cssCodeSplit: true
+  }
+});
+
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Content-Type = "text/css"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/remoteEntry.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+
+My problem is 
+    cssCodeSplit: true, // Critical fix
+If i will make true my music-library-app is not visble, my main-app css properly visible and it's failing to load my music-library-app by implementing lazy loading 
+If I will make false my music-library-app indepedently working fine, but after fetching my music-library-app my main-app UI is disappearing and my music-library-ui is displaying without css 
+If you understood the problem . Explain my problem

@@ -39,16 +39,36 @@ export default defineConfig({
     })
   ],
   build: {
+    modulePreload: false,
     target: 'esnext',
     minify: false,
-    cssCodeSplit: true, // Critical fix
+    cssCodeSplit: false,
     rollupOptions: {
       output: {
-        entryFileNames: 'remoteEntry.js',
-        assetFileNames: '[name].[ext]', // Fixes asset paths
-        format: 'esm'
+        format: 'esm',
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
       }
     }
   },
-  base: './' // Absolute critical fix
+  server: {
+    port: 5001,
+    cors: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,OPTIONS',
+      'Access-Control-Allow-Headers': '*'
+    }
+  },
+  preview: {
+    port: 5001,
+    cors: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,OPTIONS',
+      'Access-Control-Allow-Headers': '*'
+    }
+  },
+  base: '/'
 });

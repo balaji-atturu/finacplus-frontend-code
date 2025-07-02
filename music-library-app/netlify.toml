@@ -13,18 +13,31 @@
   publish = "dist"
 
 [[headers]]
-  for = "/*.js"
+  for = "/*"
   [headers.values]
-    Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
-
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Content-Type = "text/css"
-    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET,OPTIONS"
+    Access-Control-Allow-Headers = "*"
+    Access-Control-Expose-Headers = "*"
+    Vary = "Origin"
 
 [[headers]]
   for = "/remoteEntry.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET,OPTIONS"
+    Access-Control-Expose-Headers = "*"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET,OPTIONS"
+    Access-Control-Expose-Headers = "*"
+
+[[headers]]
+  for = "/assets/remoteEntry.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
