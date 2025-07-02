@@ -1,30 +1,48 @@
+ # [build]
+ # command = "npm run build"
+ # publish = "dist"
+
+ # [[headers]]
+ # for = "/assets/remoteEntry.js"
+   # [headers.values]
+ #  Content-Type = "application/javascript"
+  # Access-Control-Allow-Origin = "*"
+
 # [build]
-# command = "npm run build"
-#  publish = "dist"
+#   command = "npm run build"
+#   publish = "dist"
 
 # [[headers]]
-#  for = "/assets/remoteEntry.js"
-#  [headers.values]
-#    Content-Type = "application/javascript"
-#    Access-Control-Allow-Origin = "*"
+#   for = "/*.js"
+#   [headers.values]
+#     Content-Type = "application/javascript"
+#     Access-Control-Allow-Origin = "*"
+
+# [[headers]]
+#   for = "/*.css"
+#   [headers.values]
+#     Content-Type = "text/css"
+#     Access-Control-Allow-Origin = "*"
+
+# [[headers]]
+#   for = "/remoteEntry.js"
+#   [headers.values]
+#     Cache-Control = "public, max-age=31536000, immutable"
+
+
 
 [build]
   command = "npm run build"
   publish = "dist"
 
 [[headers]]
-  for = "/*.js"
+  for = "/*"
   [headers.values]
-    Content-Type = "application/javascript"
     Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET,OPTIONS"
 
 [[headers]]
-  for = "/*.css"
+  for = "/assets/remoteEntry.js"
   [headers.values]
-    Content-Type = "text/css"
-    Access-Control-Allow-Origin = "*"
+    Cache-Control = "no-cache"
 
-[[headers]]
-  for = "/remoteEntry.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"

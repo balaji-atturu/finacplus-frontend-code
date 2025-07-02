@@ -1,11 +1,9 @@
-// src/auth.js
 
 const users = {
   admin: { username: 'admin', password: 'admin123', role: 'admin' },
   user: { username: 'user', password: 'user123', role: 'user' }
 };
 
-// Simulated login function
 export const login = (username, password) => {
   const user = Object.values(users).find(
     (u) => u.username === username && u.password === password

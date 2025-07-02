@@ -1,9 +1,11 @@
-import React from 'react';
-import App from '../App';
-import '../App.css';
+import React from 'react'
+import App from '../App'
 
-const MusicLibrary = ({ role }) => {  // Receive role as prop
-  return <App  role={role}/>;  // Pass it down to App
-};
-
-export default MusicLibrary;
+const MusicLibrary=(role)=>{
+    return (
+        <>
+        <App role={role}/>
+        </>
+    )
+}
+export default MusicLibrary

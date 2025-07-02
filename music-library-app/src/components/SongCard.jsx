@@ -1,8 +1,8 @@
 
   import React from 'react';
-import '../App.css';
+import '../styles/Styles1.css';
 
-const SongCard = ({ song, onDelete }) => {
+const SongCard = ({ song }) => {
   return (
     <div className="song-card">
       <div className="song-card-header">
@@ -21,12 +21,7 @@ const SongCard = ({ song, onDelete }) => {
         </p>
       </div>
 
-      {/* ✅ Show delete button only if onDelete is passed */}
-      {onDelete && (
-        <button className="delete-button" onClick={onDelete}>
-          🗑️ Delete
-        </button>
-      )}
+      
     </div>
   );
 };

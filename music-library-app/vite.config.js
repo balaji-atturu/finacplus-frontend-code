@@ -3,24 +3,41 @@
 // import federation from '@originjs/vite-plugin-federation';
 
 // export default defineConfig({
+//   server: {
+//     port: 3001,
+//     host: 'localhost',
+//     cors: true,
+//     headers: {
+//       "Access-Control-Allow-Origin": "*"
+//     }
+//   },
 //   plugins: [
 //     react(),
 //     federation({
 //       name: 'music-library',
 //       filename: 'remoteEntry.js',
 //       exposes: {
-//         './MusicLibrary': './src/components/MusicLibrary.jsx' // Your exposed component
+//         './MusicLibrary': './src/components/SongsList.jsx'
 //       },
 //       shared: ['react', 'react-dom']
 //     })
 //   ],
 //   build: {
-//     modulePreload: false,
+//     modulePreload: false, 
 //     target: 'esnext',
 //     minify: false,
-//     cssCodeSplit: false
+//     cssCodeSplit: false,
+//     rollupOptions: {
+//       output: {
+//         format: 'esm',
+//         entryFileNames: '[name].js', 
+//         minifyInternalExports: false
+//       }
+//     }
 //   }
 // });
+
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
@@ -32,22 +49,28 @@ export default defineConfig({
       name: 'music-library',
       filename: 'remoteEntry.js',
       exposes: {
-        './MusicLibrary': './src/components/MusicLibrary.jsx'
+        './MusicLibrary': './src/components/SongsList.jsx'
       },
       shared: ['react', 'react-dom']
     })
   ],
   build: {
+    modulePreload: false,
     target: 'esnext',
-    minify: false,
-    cssCodeSplit: true,
+    minify: true,
+    cssCodeSplit: false,
     rollupOptions: {
       output: {
-        entryFileNames: 'remoteEntry.js',
-        assetFileNames: '[name].[ext]',
-        format: 'esm'
+        format: 'esm',
+        entryFileNames: '[name].js',
+        minifyInternalExports: false
       }
     }
   },
-  base: './' // Critical for Netlify
+  preview: {
+    port: 3001,
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
+  }
 });

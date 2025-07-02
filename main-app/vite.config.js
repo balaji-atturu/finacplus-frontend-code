@@ -3,22 +3,27 @@
 // import federation from '@originjs/vite-plugin-federation';
 
 // export default defineConfig({
+//   server: {
+//     port: 3000,
+//     host: 'localhost'
+//   },
 //   plugins: [
 //     react(),
 //     federation({
 //       name: 'main-app',
 //       remotes: {
-//         musicLibrary: 'https://music-library-separate.netlify.app/assets/remoteEntry.js'
+//         'music-library': 'http://localhost:4173/assets/remoteEntry.js'
 //       },
 //       shared: ['react', 'react-dom']
 //     })
 //   ],
 //   build: {
-//     modulePreload: false,
 //     target: 'esnext',
-//     minify: false
+//     minify: false,
+//     cssCodeSplit: false
 //   }
 // });
+
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -30,14 +35,17 @@ export default defineConfig({
     federation({
       name: 'main-app',
       remotes: {
-        musicLibrary: 'https://music-library-separate.netlify.app/remoteEntry.js'
+        'music-library': 'https://music-library-separate.netlify.app/assets/remoteEntry.js'
       },
       shared: ['react', 'react-dom']
     })
   ],
   build: {
     target: 'esnext',
-    minify: false,
-    cssCodeSplit: true
+    minify: true,
+    cssCodeSplit: false
+  },
+  preview: {
+    port: 3000
   }
 });

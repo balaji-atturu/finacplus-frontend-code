@@ -1,4 +1,3 @@
-// components/LoginForm.jsx
 import React from 'react';
 import '../App.css'
 const LoginForm = ({ username, password, onUsernameChange, onPasswordChange, onSubmit }) => {
